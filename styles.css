@@ -1379,6 +1379,38 @@ img {
 .rounded-img {
     border-radius: 12px;
 }
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.section-title svg {
+    width: 20px;
+    height: 20px;
+    color: var(--blue-light);
+}
+
+.section-title .eyebrow {
+    margin: 0;
+}
+
+.education-info {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 20px;
+}
+
+.education-info small {
+    color: #67819d;
+    font-size: 0.65rem;
+}
+
+.education-info strong {
+    font-size: 0.85rem;
+}
 /* =========================================================
    RESPONSIVE
 ========================================================= */
