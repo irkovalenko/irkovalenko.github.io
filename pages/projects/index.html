@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="module" src="../../../js/loadHeader.js"></script>
+        <script type="module" src="../../../js/loadFooter.js"></script>
         <title>Projects</title>
 
         <link rel="stylesheet" href="../../../styles.css" />
@@ -11,7 +12,33 @@
 
     <body>
         <div id="header"></div>
+        <main>
+            <section id="projects" class="section projects-section">
+                <div class="container">
+                    <div class="section-heading">
+                        <p class="eyebrow">MY PROJECTS</p>
+                    </div>
 
-        <main></main>
+                    <div class="project-filters">
+                        <button class="active">All</button>
+                        <button>Tableau</button>
+                        <button>Laravel</button>
+                        <button>JavaScript</button>
+                        <button>Python / ML</button>
+                        <button> HTML & CSS</button>
+                    </div>
+                    <div class="category-grid"></div>
+                </div>
+            </div>
+        </main>
+        <script type="module">
+            import { createProjectCard } from '../../../js/components/projectCard.js';
+            import { projects } from '../../../js/data/projects.js';
+
+            const projectGrid = document.querySelector('.category-grid');
+
+            projectGrid.innerHTML = projects.map(createProjectCard).join('');
+        </script>
     </body>
+    <div id="footer"></div>
 </html>
