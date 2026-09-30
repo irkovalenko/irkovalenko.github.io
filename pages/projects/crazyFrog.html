@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="module" src="../../../js/loadHeader.js"></script>
         <script type="module" src="../../../js/loadFooter.js"></script>
-        <title>Certificates</title>
+        <title>Projects</title>
 
         <link rel="stylesheet" href="../../../styles.css" />
     </head>
@@ -13,24 +13,18 @@
     <body>
         <div id="header"></div>
         <main>
-            <div class="section">
+            <section id="projects" class="section projects-section">
                 <div class="container">
                     <div class="section-heading">
-                        <h2>Courses & <span>Certificates</span></h2>
+                        <p class="eyebrow">Crazy Frog - jumping game</p>
                     </div>
-
-                    <div class="course-grid"></div>
+                       <a href="https://irkovalenko.github.io/jumping-game/" class="btn btn-primary">
+                                Preview
+                                <span>→</span>
+                            </a>
                 </div>
             </div>
         </main>
-        <script type="module">
-            import { createCourseCard } from '../../../js/components/courseCard.js';
-            import { courses } from '../../../js/data/courses.js';
-
-            const courseGrid = document.querySelector('.course-grid');
-
-            courseGrid.innerHTML = courses.map(createCourseCard).join('');
-        </script>
-        <div id="footer"></div>
     </body>
+    <div id="footer"></div>
 </html>
