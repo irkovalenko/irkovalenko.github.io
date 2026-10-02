@@ -1,44 +1,80 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script type="module" src="../../../js/loadHeader.js"></script>
-        <script type="module" src="../../../js/loadFooter.js"></script>
-        <title>Projects</title>
 
-        <link rel="stylesheet" href="../../../styles.css" />
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="../../../js/loadHeader.js"></script>
+    <script type="module" src="../../../js/loadFooter.js"></script>
+    <title>Projects</title>
 
-    <body>
-        <div id="header"></div>
-        <main>
-            <section id="projects" class="section projects-section">
-                <div class="container">
-                    <div class="section-heading">
-                        <p class="eyebrow">MY PROJECTS</p>
-                    </div>
+    <link rel="stylesheet" href="../../../styles.css" />
+</head>
 
-                    <div class="project-filters">
-                        <button class="active">All</button>
-                        <button>Tableau</button>
-                        <button>Laravel</button>
-                        <button>JavaScript</button>
-                        <button>Python / ML</button>
-                        <button> HTML & CSS</button>
-                    </div>
-                    <div class="category-grid"></div>
+<body>
+    <div id="header"></div>
+    <main>
+        <section id="projects" class="section projects-section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">MY PROJECTS</p>
                 </div>
+
+                <div class="project-filters">
+                    <button class="active" data-filter="all">All</button>
+                    <button data-filter="tableau">Tableau</button>
+                    <button data-filter="laravel">Laravel</button>
+                    <button data-filter="javascript">JavaScript</button>
+                    <button data-filter="python">Python / ML</button>
+                    <button data-filter="html"> HTML & CSS</button>
+                </div>
+                <div class="category-grid"></div>
             </div>
-        </main>
-        <script type="module">
-            import { createProjectCard } from '../../../js/components/projectCard.js';
-            import { projects } from '../../../js/data/projects.js';
-
-            const projectGrid = document.querySelector('.category-grid');
-
-            projectGrid.innerHTML = projects.map(createProjectCard).join('');
-        </script>
-    </body>
+            </div>
+    </main>
     <div id="footer"></div>
+    <script type="module">
+        import { createProjectCard } from '../../../js/components/projectCard.js';
+        import { projects } from '../../../js/data/projects.js';
+
+        const projectGrid = document.querySelector('.category-grid');
+        const filterContainer = document.querySelector('.project-filters');
+        const filterButtons = filterContainer.querySelectorAll('button');
+        const filterMap = {
+            'Python / ML': ['python', 'ml', 'machine learning'],
+            'HTML & CSS': ['html', 'css'],
+            'JavaScript': ['javascript', 'js'],
+            'Tableau': ['tableau'],
+            'Laravel': ['laravel', 'php'],
+        };
+
+        function renderProjects(list) {
+        projectGrid.innerHTML = list.length
+            ? list.map(createProjectCard).join('')
+            : '<p>No projects in this category yet.</p>';
+    }
+
+        function filterProjects(filter) {
+            if (filter === 'all') return projects;
+            const matches = filterMap[filter] ?? [filter];
+            return projects.filter((p) => p.stack.some((tag) => matches.includes(tag)));
+        }
+
+        filterContainer.addEventListener('click', (e) => {
+            const button = e.target.closest('button');
+            if (!button) return;
+
+            // update active state
+            filterButtons.forEach((btn) => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // filter + render
+            renderProjects(filterProjects(button.dataset.filter));
+        });
+
+        // initial render
+        renderProjects(projects);
+    </script>
+</body>
+
 </html>

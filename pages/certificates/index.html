@@ -23,6 +23,7 @@
                 </div>
             </div>
         </main>
+        <div id="footer"></div>
         <script type="module">
             import { createCourseCard } from '../../../js/components/courseCard.js';
             import { courses } from '../../../js/data/courses.js';
@@ -31,6 +32,5 @@
 
             courseGrid.innerHTML = courses.map(createCourseCard).join('');
         </script>
-        <div id="footer"></div>
     </body>
 </html>
